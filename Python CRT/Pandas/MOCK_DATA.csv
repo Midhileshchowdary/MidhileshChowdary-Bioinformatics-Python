@@ -1,0 +1,101 @@
+genome_id,dna_sequence,gene_name,mutation_type,chromosome_number,mutation_frequency,protein_expression_level,mutation_effect,mutation_location,mutation_consequence
+1,"",KRAS,deletion,14,Never,43.92,nonsense,exon,pathogenic
+2,"",EGFR,insertion,8,Daily,74.5,silent,exon,benign
+3,"",KRAS,substitution,10,Weekly,15.84,silent,exon,likely pathogenic
+4,"",BRCA1,deletion,12,Monthly,14.25,nonsense,intron,benign
+5,"",PTEN,deletion,2,Seldom,24.59,missense,intron,pathogenic
+6,"",TP53,substitution,9,Daily,66.72,missense,promoter,pathogenic
+7,"",TP53,insertion,8,Yearly,84.46,silent,exon,likely pathogenic
+8,"",BRCA1,substitution,2,Often,29.1,nonsense,intron,pathogenic
+9,"",EGFR,insertion,3,Seldom,25.31,missense,exon,benign
+10,"",BRCA1,deletion,23,Yearly,40.08,nonsense,promoter,pathogenic
+11,"",BRCA1,substitution,9,Yearly,64.67,nonsense,intron,benign
+12,"",KRAS,substitution,16,Seldom,41.38,nonsense,intron,benign
+13,"",BRCA1,substitution,14,Monthly,39.64,silent,intron,likely pathogenic
+14,"",PTEN,insertion,2,Yearly,38.13,nonsense,promoter,likely pathogenic
+15,"",TP53,insertion,6,Monthly,74.82,silent,promoter,likely pathogenic
+16,"",TP53,substitution,1,Daily,62.03,nonsense,exon,benign
+17,"",KRAS,substitution,17,Never,94.85,nonsense,promoter,likely pathogenic
+18,"",EGFR,deletion,19,Often,59.2,missense,promoter,pathogenic
+19,"",EGFR,insertion,5,Once,28.73,missense,intron,pathogenic
+20,"",KRAS,insertion,3,Yearly,91.54,missense,promoter,pathogenic
+21,"",TP53,insertion,7,Weekly,69.3,silent,promoter,likely pathogenic
+22,"",PTEN,deletion,9,Yearly,18.06,silent,exon,benign
+23,"",TP53,deletion,13,Seldom,86.95,missense,intron,pathogenic
+24,"",TP53,substitution,18,Often,13.75,nonsense,exon,likely pathogenic
+25,"",KRAS,substitution,2,Often,93.28,nonsense,promoter,likely pathogenic
+26,"",BRCA1,deletion,22,Once,95.4,silent,promoter,pathogenic
+27,"",PTEN,deletion,7,Often,97.15,missense,exon,likely pathogenic
+28,"",KRAS,substitution,3,Daily,47.08,missense,intron,benign
+29,"",BRCA1,insertion,10,Never,94.65,missense,exon,pathogenic
+30,"",EGFR,substitution,15,Often,93.14,silent,promoter,benign
+31,"",EGFR,deletion,1,Often,80.74,missense,exon,pathogenic
+32,"",PTEN,insertion,12,Yearly,23.59,silent,intron,likely pathogenic
+33,"",BRCA1,deletion,3,Weekly,90.62,silent,intron,pathogenic
+34,"",KRAS,deletion,1,Yearly,54.54,silent,exon,pathogenic
+35,"",KRAS,substitution,7,Seldom,73.1,missense,intron,benign
+36,"",PTEN,deletion,19,Often,53.81,nonsense,exon,benign
+37,"",BRCA1,insertion,19,Yearly,40.78,missense,intron,likely pathogenic
+38,"",EGFR,insertion,12,Once,37.02,nonsense,exon,pathogenic
+39,"",TP53,insertion,1,Never,17.19,nonsense,exon,likely pathogenic
+40,"",EGFR,substitution,10,Seldom,96.45,nonsense,promoter,likely pathogenic
+41,"",TP53,deletion,16,Weekly,90.9,silent,promoter,pathogenic
+42,"",KRAS,deletion,4,Monthly,64.43,missense,intron,benign
+43,"",EGFR,deletion,22,Seldom,58.6,missense,promoter,benign
+44,"",KRAS,insertion,10,Daily,18.33,silent,promoter,likely pathogenic
+45,"",BRCA1,deletion,23,Weekly,10.78,nonsense,intron,likely pathogenic
+46,"",PTEN,substitution,10,Daily,27.2,silent,promoter,likely pathogenic
+47,"",KRAS,substitution,16,Often,52.6,missense,intron,likely pathogenic
+48,"",TP53,deletion,4,Yearly,91.28,nonsense,promoter,benign
+49,"",KRAS,deletion,11,Monthly,31.31,silent,promoter,likely pathogenic
+50,"",EGFR,deletion,16,Daily,52.32,missense,intron,benign
+51,"",BRCA1,substitution,5,Monthly,65.71,missense,intron,pathogenic
+52,"",KRAS,substitution,18,Daily,26.68,silent,exon,pathogenic
+53,"",PTEN,deletion,8,Monthly,69.54,nonsense,promoter,likely pathogenic
+54,"",PTEN,insertion,5,Monthly,77.52,missense,intron,pathogenic
+55,"",BRCA1,deletion,5,Weekly,68.3,silent,promoter,benign
+56,"",BRCA1,deletion,5,Yearly,51.54,nonsense,exon,pathogenic
+57,"",TP53,substitution,7,Yearly,86.75,missense,promoter,pathogenic
+58,"",KRAS,insertion,23,Never,24.09,silent,intron,benign
+59,"",KRAS,insertion,21,Once,9.99,silent,exon,benign
+60,"",KRAS,insertion,15,Weekly,95.34,missense,exon,benign
+61,"",PTEN,insertion,10,Weekly,46.9,silent,promoter,pathogenic
+62,"",TP53,substitution,7,Once,31.14,nonsense,intron,pathogenic
+63,"",EGFR,insertion,18,Never,33.04,nonsense,exon,benign
+64,"",BRCA1,substitution,12,Seldom,67.1,nonsense,intron,benign
+65,"",TP53,deletion,5,Often,71.35,missense,exon,benign
+66,"",TP53,deletion,20,Once,12.16,nonsense,exon,pathogenic
+67,"",KRAS,substitution,4,Never,98.8,silent,intron,pathogenic
+68,"",PTEN,deletion,17,Often,76.93,missense,promoter,pathogenic
+69,"",TP53,substitution,13,Weekly,5.64,silent,exon,pathogenic
+70,"",EGFR,substitution,18,Monthly,13.49,silent,intron,pathogenic
+71,"",BRCA1,deletion,2,Daily,38.76,nonsense,intron,pathogenic
+72,"",BRCA1,deletion,23,Seldom,67.69,missense,promoter,likely pathogenic
+73,"",TP53,substitution,12,Daily,71.84,missense,exon,likely pathogenic
+74,"",BRCA1,substitution,3,Daily,57.61,nonsense,intron,likely pathogenic
+75,"",PTEN,substitution,14,Once,91.06,missense,exon,likely pathogenic
+76,"",EGFR,deletion,16,Daily,19.81,missense,promoter,likely pathogenic
+77,"",BRCA1,substitution,4,Never,43.15,silent,exon,likely pathogenic
+78,"",BRCA1,insertion,6,Daily,79.02,missense,promoter,pathogenic
+79,"",EGFR,insertion,3,Weekly,7.44,missense,intron,pathogenic
+80,"",TP53,insertion,15,Daily,9.03,nonsense,intron,pathogenic
+81,"",PTEN,substitution,22,Never,37.47,missense,intron,pathogenic
+82,"",PTEN,substitution,19,Often,98.3,missense,promoter,likely pathogenic
+83,"",KRAS,insertion,19,Once,85.23,silent,exon,pathogenic
+84,"",BRCA1,substitution,13,Daily,62.47,silent,intron,pathogenic
+85,"",TP53,deletion,20,Often,30.91,silent,intron,likely pathogenic
+86,"",KRAS,insertion,1,Once,94.16,silent,intron,likely pathogenic
+87,"",EGFR,substitution,19,Often,58.56,missense,exon,likely pathogenic
+88,"",EGFR,substitution,16,Yearly,38.43,silent,promoter,benign
+89,"",BRCA1,substitution,14,Never,92.41,silent,exon,benign
+90,"",BRCA1,insertion,3,Daily,43.97,silent,promoter,benign
+91,"",KRAS,deletion,18,Weekly,23.22,missense,promoter,likely pathogenic
+92,"",TP53,deletion,11,Once,37.68,silent,exon,benign
+93,"",PTEN,deletion,4,Yearly,84.53,nonsense,exon,pathogenic
+94,"",PTEN,substitution,12,Never,71.99,nonsense,intron,pathogenic
+95,"",PTEN,deletion,10,Daily,99.78,nonsense,promoter,benign
+96,"",PTEN,substitution,17,Often,21.41,nonsense,exon,pathogenic
+97,"",EGFR,substitution,22,Seldom,28.48,nonsense,intron,likely pathogenic
+98,"",KRAS,insertion,17,Monthly,62.37,silent,promoter,likely pathogenic
+99,"",EGFR,insertion,11,Often,17.55,silent,promoter,benign
+100,"",EGFR,deletion,7,Daily,83.41,missense,promoter,benign
