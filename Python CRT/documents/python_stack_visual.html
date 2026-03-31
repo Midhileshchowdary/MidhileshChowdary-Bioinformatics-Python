@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Stack Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .header {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .visual-demo {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        
+        .stack-display {
+            flex: 1;
+        }
+        
+        .controls {
+            flex: 1;
+        }
+        
+        .stack-container {
+            display: flex;
+            flex-direction: column-reverse;
+            min-height: 200px;
+            align-items: center;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fafafa;
+        }
+        
+        .stack-item {
+            width: 120px;
+            height: 40px;
+            background: #4CAF50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2px 0;
+            border-radius: 5px;
+            font-weight: bold;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .stack-item:last-child {
+            background: #2196F3;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .control-group {
+            margin: 15px 0;
+        }
+        
+        input, button {
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin: 5px;
+        }
+        
+        button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #1976D2;
+        }
+        
+        .btn-pop { background: #f44336; }
+        .btn-pop:hover { background: #d32f2f; }
+        
+        .btn-clear { background: #757575; }
+        .btn-clear:hover { background: #424242; }
+        
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .success { background: #e8f5e8; color: #2e7d32; }
+        .error { background: #ffebee; color: #c62828; }
+        .info { background: #e3f2fd; color: #1565c0; }
+        
+        .code-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .keyword { color: #66d9ef; }
+        .string { color: #a6e22e; }
+        .comment { color: #75715e; }
+        
+        .info-box {
+            background: #e8f4f8;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .visual-demo {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🐍 Python Stack Data Structure</h1>
+        <p>Interactive guide with visual examples and clean code</p>
+    </div>
+
+    <div class="section">
+        <h2>🎮 Interactive Stack Demo</h2>
+        <div class="visual-demo">
+            <div class="stack-display">
+                <h3>Stack Visualization</h3>
+                <div class="stack-container" id="stackContainer">
+                    <div class="stack-item">Item 1</div>
+                    <div class="stack-item">Item 2</div>
+                    <div class="stack-item">Item 3 (TOP)</div>
+                </div>
+                <p><strong>Size:</strong> <span id="stackSize">3</span> | <strong>Top:</strong> <span id="stackTop">Item 3</span></p>
+            </div>
+            
+            <div class="controls">
+                <h3>Controls</h3>
+                <div class="control-group">
+                    <input type="text" id="stackInput" placeholder="Enter item" maxlength="10">
+                    <button onclick="pushItem()">Push</button>
+                </div>
+                <div class="control-group">
+                    <button class="btn-pop" onclick="popItem()">Pop</button>
+                    <button onclick="peekItem()">Peek</button>
+                    <button class="btn-clear" onclick="clearStack()">Clear</button>
+                </div>
+                <div class="status info" id="status">Ready! Try pushing or popping items</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Simple Stack Implementation</h2>
+        <div class="code-box">
+<span class="keyword">class</span> Stack:
+    <span class="keyword">def</span> __init__(self):
+        self.items = []
+    
+    <span class="keyword">def</span> push(self, item):
+        <span class="comment"># Add item to top</span>
+        self.items.append(item)
+    
+    <span class="keyword">def</span> pop(self):
+        <span class="comment"># Remove and return top item</span>
+        <span class="keyword">if</span> self.is_empty():
+            <span class="keyword">return</span> <span class="keyword">None</span>
+        <span class="keyword">return</span> self.items.pop()
+    
+    <span class="keyword">def</span> peek(self):
+        <span class="comment"># Look at top item without removing</span>
+        <span class="keyword">if</span> self.is_empty():
+            <span class="keyword">return</span> <span class="keyword">None</span>
+        <span class="keyword">return</span> self.items[-1]
+    
+    <span class="keyword">def</span> is_empty(self):
+        <span class="keyword">return</span> len(self.items) == 0
+    
+    <span class="keyword">def</span> size(self):
+        <span class="keyword">return</span> len(self.items)
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🚀 How to Use</h2>
+        <div class="code-box">
+<span class="comment"># Create a stack</span>
+stack = Stack()
+
+<span class="comment"># Add items (push)</span>
+stack.push(<span class="string">"First"</span>)
+stack.push(<span class="string">"Second"</span>)
+stack.push(<span class="string">"Third"</span>)
+
+<span class="comment"># Check top item</span>
+print(stack.peek())  <span class="comment"># Output: Third</span>
+
+<span class="comment"># Remove items (pop)</span>
+print(stack.pop())   <span class="comment"># Output: Third</span>
+print(stack.pop())   <span class="comment"># Output: Second</span>
+
+<span class="comment"># Check size</span>
+print(stack.size())  <span class="comment"># Output: 1</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>💡 Key Concepts</h2>
+        <div class="info-box">
+            <h3>LIFO - Last In, First Out</h3>
+            <p>Items are removed in reverse order of insertion. The last item pushed is the first to be popped.</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>Main Operations</h3>
+            <ul>
+                <li><strong>Push:</strong> Add item to top</li>
+                <li><strong>Pop:</strong> Remove item from top</li>
+                <li><strong>Peek:</strong> Look at top item</li>
+                <li><strong>Is_empty:</strong> Check if stack is empty</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h3>Common Uses</h3>
+            <ul>
+                <li>Function calls (call stack)</li>
+                <li>Undo operations</li>
+                <li>Browser back button</li>
+                <li>Expression evaluation</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let stack = ["Item 1", "Item 2", "Item 3"];
+        
+        function updateDisplay() {
+            const container = document.getElementById('stackContainer');
+            const sizeEl = document.getElementById('stackSize');
+            const topEl = document.getElementById('stackTop');
+            
+            container.innerHTML = '';
+            
+            stack.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'stack-item';
+                div.textContent = index === stack.length - 1 ? item + ' (TOP)' : item;
+                container.appendChild(div);
+            });
+            
+            sizeEl.textContent = stack.length;
+            topEl.textContent = stack.length > 0 ? stack[stack.length - 1] : 'Empty';
+        }
+        
+        function showStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+        
+        function pushItem() {
+            const input = document.getElementById('stackInput');
+            const value = input.value.trim();
+            
+            if (!value) {
+                showStatus('Enter a value first!', 'error');
+                return;
+            }
+            
+            if (stack.length >= 8) {
+                showStatus('Stack full! (8 items max)', 'error');
+                return;
+            }
+            
+            stack.push(value);
+            input.value = '';
+            updateDisplay();
+            showStatus(`Pushed: ${value}`, 'success');
+        }
+        
+        function popItem() {
+            if (stack.length === 0) {
+                showStatus('Stack is empty!', 'error');
+                return;
+            }
+            
+            const item = stack.pop();
+            updateDisplay();
+            showStatus(`Popped: ${item}`, 'success');
+        }
+        
+        function peekItem() {
+            if (stack.length === 0) {
+                showStatus('Stack is empty!', 'error');
+                return;
+            }
+            
+            showStatus(`Top item: ${stack[stack.length - 1]}`, 'info');
+        }
+        
+        function clearStack() {
+            stack = [];
+            updateDisplay();
+            showStatus('Stack cleared!', 'success');
+        }
+        
+        document.getElementById('stackInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') pushItem();
+        });
+    </script>
+</body>
+</html>

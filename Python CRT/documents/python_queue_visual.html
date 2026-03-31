@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Queue Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .header {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .visual-demo {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        
+        .queue-display {
+            flex: 1;
+        }
+        
+        .controls {
+            flex: 1;
+        }
+        
+        .queue-container {
+            display: flex;
+            min-height: 80px;
+            align-items: center;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fafafa;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .queue-item {
+            min-width: 80px;
+            height: 50px;
+            background: #FF9800;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 3px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 12px;
+            animation: slideIn 0.3s ease;
+            text-align: center;
+            padding: 5px;
+        }
+        
+        .queue-item:first-child {
+            background: #4CAF50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+        
+        .queue-item:last-child {
+            background: #2196F3;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .queue-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .arrow {
+            position: absolute;
+            font-size: 24px;
+            color: #666;
+        }
+        
+        .arrow-left {
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .arrow-right {
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .control-group {
+            margin: 15px 0;
+        }
+        
+        input, button {
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin: 5px;
+        }
+        
+        button {
+            background: #FF9800;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #F57C00;
+        }
+        
+        .btn-dequeue { background: #4CAF50; }
+        .btn-dequeue:hover { background: #45A049; }
+        
+        .btn-clear { background: #757575; }
+        .btn-clear:hover { background: #424242; }
+        
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .success { background: #e8f5e8; color: #2e7d32; }
+        .error { background: #ffebee; color: #c62828; }
+        .info { background: #e3f2fd; color: #1565c0; }
+        
+        .code-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .keyword { color: #66d9ef; }
+        .string { color: #a6e22e; }
+        .comment { color: #75715e; }
+        
+        .info-box {
+            background: #fff3e0;
+            border-left: 4px solid #FF9800;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .comparison-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .comparison-item.stack {
+            border-color: #2196F3;
+        }
+        
+        .comparison-item.queue {
+            border-color: #FF9800;
+        }
+        
+        @media (max-width: 768px) {
+            .visual-demo {
+                flex-direction: column;
+            }
+            
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .queue-container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .queue-item {
+                width: 100%;
+                margin: 3px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚶‍♂️ Python Queue Data Structure</h1>
+        <p>Interactive guide with visual examples and clean code</p>
+    </div>
+
+    <div class="section">
+        <h2>🎮 Interactive Queue Demo</h2>
+        <div class="visual-demo">
+            <div class="queue-display">
+                <h3>Queue Visualization</h3>
+                <div class="queue-container" id="queueContainer">
+                    <div class="arrow arrow-left">←</div>
+                    <div class="queue-item">First (FRONT)</div>
+                    <div class="queue-item">Second</div>
+                    <div class="queue-item">Third (REAR)</div>
+                    <div class="arrow arrow-right">←</div>
+                </div>
+                <div class="queue-labels">
+                    <span><strong>DEQUEUE (Remove)</strong></span>
+                    <span><strong>ENQUEUE (Add)</strong></span>
+                </div>
+                <p><strong>Size:</strong> <span id="queueSize">3</span> | <strong>Front:</strong> <span id="queueFront">First</span> | <strong>Rear:</strong> <span id="queueRear">Third</span></p>
+            </div>
+            
+            <div class="controls">
+                <h3>Controls</h3>
+                <div class="control-group">
+                    <input type="text" id="queueInput" placeholder="Enter item" maxlength="10">
+                    <button onclick="enqueue()">Enqueue</button>
+                </div>
+                <div class="control-group">
+                    <button class="btn-dequeue" onclick="dequeue()">Dequeue</button>
+                    <button onclick="peekFront()">Peek Front</button>
+                    <button class="btn-clear" onclick="clearQueue()">Clear</button>
+                </div>
+                <div class="status info" id="status">Ready! Try enqueueing or dequeueing items</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📝 Simple Queue Implementation</h2>
+        <div class="code-box">
+<span class="keyword">class</span> Queue:
+    <span class="keyword">def</span> __init__(self):
+        self.items = []
+    
+    <span class="keyword">def</span> enqueue(self, item):
+        <span class="comment"># Add item to rear (end)</span>
+        self.items.append(item)
+    
+    <span class="keyword">def</span> dequeue(self):
+        <span class="comment"># Remove and return front item</span>
+        <span class="keyword">if</span> self.is_empty():
+            <span class="keyword">return</span> <span class="keyword">None</span>
+        <span class="keyword">return</span> self.items.pop(0)
+    
+    <span class="keyword">def</span> peek_front(self):
+        <span class="comment"># Look at front item without removing</span>
+        <span class="keyword">if</span> self.is_empty():
+            <span class="keyword">return</span> <span class="keyword">None</span>
+        <span class="keyword">return</span> self.items[0]
+    
+    <span class="keyword">def</span> peek_rear(self):
+        <span class="comment"># Look at rear item without removing</span>
+        <span class="keyword">if</span> self.is_empty():
+            <span class="keyword">return</span> <span class="keyword">None</span>
+        <span class="keyword">return</span> self.items[-1]
+    
+    <span class="keyword">def</span> is_empty(self):
+        <span class="keyword">return</span> len(self.items) == 0
+    
+    <span class="keyword">def</span> size(self):
+        <span class="keyword">return</span> len(self.items)
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🚀 How to Use</h2>
+        <div class="code-box">
+<span class="comment"># Create a queue</span>
+queue = Queue()
+
+<span class="comment"># Add items (enqueue)</span>
+queue.enqueue(<span class="string">"First"</span>)
+queue.enqueue(<span class="string">"Second"</span>)
+queue.enqueue(<span class="string">"Third"</span>)
+
+<span class="comment"># Check front item</span>
+print(queue.peek_front())  <span class="comment"># Output: First</span>
+
+<span class="comment"># Remove items (dequeue)</span>
+print(queue.dequeue())     <span class="comment"># Output: First</span>
+print(queue.dequeue())     <span class="comment"># Output: Second</span>
+
+<span class="comment"># Check size</span>
+print(queue.size())        <span class="comment"># Output: 1</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🆚 Stack vs Queue Comparison</h2>
+        <div class="comparison">
+            <div class="comparison-item stack">
+                <h3>📚 Stack (LIFO)</h3>
+                <p><strong>Last In, First Out</strong></p>
+                <ul>
+                    <li>Add/Remove from same end (top)</li>
+                    <li>Like a stack of plates</li>
+                    <li>Operations: push, pop, peek</li>
+                    <li>Use: Undo operations, function calls</li>
+                </ul>
+            </div>
+            
+            <div class="comparison-item queue">
+                <h3>🚶‍♂️ Queue (FIFO)</h3>
+                <p><strong>First In, First Out</strong></p>
+                <ul>
+                    <li>Add at rear, remove from front</li>
+                    <li>Like a line of people</li>
+                    <li>Operations: enqueue, dequeue, peek</li>
+                    <li>Use: Task scheduling, printing</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>💡 Key Concepts</h2>
+        <div class="info-box">
+            <h3>FIFO - First In, First Out</h3>
+            <p>Items are removed in the same order they were added. The first item enqueued is the first to be dequeued.</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>Main Operations</h3>
+            <ul>
+                <li><strong>Enqueue:</strong> Add item to rear</li>
+                <li><strong>Dequeue:</strong> Remove item from front</li>
+                <li><strong>Peek Front:</strong> Look at front item</li>
+                <li><strong>Peek Rear:</strong> Look at rear item</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h3>Common Uses</h3>
+            <ul>
+                <li>Task scheduling in operating systems</li>
+                <li>Print job management</li>
+                <li>Breadth-first search algorithms</li>
+                <li>Customer service systems</li>
+                <li>Data buffering</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>⚡ Efficient Queue Implementation</h2>
+        <div class="info-box">
+            <h3>Note: Using collections.deque for better performance</h3>
+            <p>The simple implementation above uses list.pop(0) which is O(n). For better performance, use collections.deque:</p>
+        </div>
+        
+        <div class="code-box">
+<span class="keyword">from</span> collections <span class="keyword">import</span> deque
+
+<span class="keyword">class</span> EfficientQueue:
+    <span class="keyword">def</span> __init__(self):
+        self.items = deque()
+    
+    <span class="keyword">def</span> enqueue(self, item):
+        <span class="comment"># O(1) - Add to right end</span>
+        self.items.append(item)
+    
+    <span class="keyword">def</span> dequeue(self):
+        <span class="comment"># O(1) - Remove from left end</span>
+        <span class="keyword">if</span> self.is_empty():
+            <span class="keyword">return</span> <span class="keyword">None</span>
+        <span class="keyword">return</span> self.items.popleft()
+    
+    <span class="keyword">def</span> peek_front(self):
+        <span class="keyword">if</span> self.is_empty():
+            <span class="keyword">return</span> <span class="keyword">None</span>
+        <span class="keyword">return</span> self.items[0]
+    
+    <span class="keyword">def</span> is_empty(self):
+        <span class="keyword">return</span> len(self.items) == 0
+    
+    <span class="keyword">def</span> size(self):
+        <span class="keyword">return</span> len(self.items)
+        </div>
+    </div>
+
+    <script>
+        let queue = ["First", "Second", "Third"];
+        
+        function updateDisplay() {
+            const container = document.getElementById('queueContainer');
+            const sizeEl = document.getElementById('queueSize');
+            const frontEl = document.getElementById('queueFront');
+            const rearEl = document.getElementById('queueRear');
+            
+            // Clear container but keep arrows
+            container.innerHTML = '<div class="arrow arrow-left">←</div><div class="arrow arrow-right">←</div>';
+            
+            // Add queue items
+            queue.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'queue-item';
+                
+                if (index === 0 && queue.length > 1) {
+                    div.textContent = item + ' (FRONT)';
+                } else if (index === queue.length - 1 && queue.length > 1) {
+                    div.textContent = item + ' (REAR)';
+                } else if (queue.length === 1) {
+                    div.textContent = item + ' (FRONT & REAR)';
+                } else {
+                    div.textContent = item;
+                }
+                
+                // Insert before the right arrow
+                const rightArrow = container.querySelector('.arrow-right');
+                container.insertBefore(div, rightArrow);
+            });
+            
+            // Update info
+            sizeEl.textContent = queue.length;
+            frontEl.textContent = queue.length > 0 ? queue[0] : 'Empty';
+            rearEl.textContent = queue.length > 0 ? queue[queue.length - 1] : 'Empty';
+        }
+        
+        function showStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+        
+        function enqueue() {
+            const input = document.getElementById('queueInput');
+            const value = input.value.trim();
+            
+            if (!value) {
+                showStatus('Enter a value first!', 'error');
+                return;
+            }
+            
+            if (queue.length >= 8) {
+                showStatus('Queue full! (8 items max)', 'error');
+                return;
+            }
+            
+            queue.push(value);
+            input.value = '';
+            updateDisplay();
+            showStatus(`Enqueued: ${value}`, 'success');
+        }
+        
+        function dequeue() {
+            if (queue.length === 0) {
+                showStatus('Queue is empty!', 'error');
+                return;
+            }
+            
+            const item = queue.shift();
+            updateDisplay();
+            showStatus(`Dequeued: ${item}`, 'success');
+        }
+        
+        function peekFront() {
+            if (queue.length === 0) {
+                showStatus('Queue is empty!', 'error');
+                return;
+            }
+            
+            showStatus(`Front item: ${queue[0]}`, 'info');
+        }
+        
+        function clearQueue() {
+            queue = [];
+            updateDisplay();
+            showStatus('Queue cleared!', 'success');
+        }
+        
+        document.getElementById('queueInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') enqueue();
+        });
+        
+        // Initialize display
+        updateDisplay();
+    </script>
+</body>
+</html>
