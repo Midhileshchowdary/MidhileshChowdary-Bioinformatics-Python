@@ -1,0 +1,7 @@
+tuple=(10,25,5,15,17,30,35)
+print(tuple)
+print("Maximum Number :",max(tuple))
+print("Minimum Number :",min(tuple))
+print("Summation :",sum(tuple))
+print("Sorted tuple :",sorted(tuple))
+print("Length of tuple :",len(tuple))
