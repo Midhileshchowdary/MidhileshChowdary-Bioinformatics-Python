@@ -1,0 +1,1 @@
+# write py prog to print even numbers from 1 to n using recursion
